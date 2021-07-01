@@ -24,4 +24,5 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function(){
         route::get('/','HomeController@index')->name('home');
+         Route::resource('/posts', 'PostController');
     });
