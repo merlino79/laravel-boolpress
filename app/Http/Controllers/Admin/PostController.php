@@ -44,6 +44,14 @@ class PostController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
+        $slug_exsist = Post::where('slug',$data['slug'])->first();
+        $counter = 0;
+        while($slug_exsist){
+          $title = $data['title'] . "-" . $counter;
+          $data['slug'] = Str::slug($title, '-');
+          $slug_exsist = Post::where('slug', $data['slug'])->first();
+          $counter++;
+        }
         $new_post = new Post();
         $new_post->fill($data);
         $new_post->save();

@@ -3,9 +3,12 @@
 @section('content')
 <div class="container">
    <div class="row">
-      <div class="col">
+      <div class="col text-center">
         <h1>{{ $post->title }}</h1>
-          <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">SHOW</a>
+          
+      </div>
+      <div class="container">
+        <a class="btn btn-primary mb-3" href="{{ route('admin.posts.show', $post) }}">SHOW</a>
       </div>
      
    </div>    
