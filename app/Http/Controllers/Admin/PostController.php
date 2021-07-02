@@ -101,9 +101,22 @@ class PostController extends Controller
     {
         $data = $request->all();
         //dd($data);
-        $data['slug'] = Str::slug($post->title, '-');
-        $post->update($data);
-        return redirect()->route('admin.posts.show', $post);
+        if($data['slug'] === '$post->slug'){
+          $data['slug'] = $post->slug;
+        }else{
+            $data['slug'] = Str::slug($data['title'], '-');
+            $slug_exsist = Post::where('slug', $data['slug'])->first();
+            $counter = 0;
+            while ($slug_exsist) {
+              $title = $data['title'] . "-" . $counter;
+              $data['slug'] = Str::slug($title, '-');
+              $slug_exsist = Post::where('slug', $data['slug'])->first();
+              $counter++;
+              }
+            }
+              
+              $post->update($data);
+              return redirect()->route('admin.posts.show', $post);
     }
 
     /**
