@@ -13,7 +13,7 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=>'required|max:255',
+            'content'=>'required|min:3'
         ];
+    }
+
+    public function messages()
+    {
+      return [
+        'title.required' => 'il titolo deve essere obbligatorio',
+        'title.max' => 'il testo del titolo deve avere un massimo di :max caratteri',
+        'content..required' => 'il contenuto deve essere obbligatorio',
+        'content.min' => 'il testo del contenuto deve avere almeno :min caratteri',
+      ];
     }
 }

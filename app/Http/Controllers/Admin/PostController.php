@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
  use Illuminate\Support\Str;
@@ -39,7 +40,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
@@ -88,7 +89,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Post $post)
+    public function update(PostRequest $request,Post $post)
     {
         $data = $request->all();
         //dd($data);
