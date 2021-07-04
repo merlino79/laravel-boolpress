@@ -11,7 +11,7 @@
                 eliminato correttamente!
             </span>
           @endif
-       <table class="table">
+       <table class="table mt-2">
         <thead>
             <tr>
                 <th>ID</th>
