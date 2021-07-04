@@ -18,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-          $posts = Post::all();
+          //$posts = Post::all();
+          $posts = Post::orderBy('id', 'desc')->paginate(6);
           // dd($posts);
           return view('admin.posts.index', compact('posts'));
          
@@ -97,27 +98,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request,Post $post)
-    {
+      public function update(PostRequest $request, Post $post)
+      {
         $data = $request->all();
-        //dd($data);
-        if($data['slug'] === '$post->slug'){
+
+        if ($post->title !== $data['title']) {
+
+          $slug = Str::slug($data['title'], '-');
+          $slug_exist = Post::where('slug', $slug)->first();
+          $counter = 0;
+          while ($slug_exist) {
+            $title = $data['title'] . '-' . $counter;
+            $slug = Str::slug($title, '-');
+            $data['slug']  = $slug;
+            $slug_exist = Post::where('slug', $slug)->first();
+            $counter++;
+          }
+        } else {
           $data['slug'] = $post->slug;
-        }else{
-            $data['slug'] = Str::slug($data['title'], '-');
-            $slug_exsist = Post::where('slug', $data['slug'])->first();
-            $counter = 0;
-            while ($slug_exsist) {
-              $title = $data['title'] . "-" . $counter;
-              $data['slug'] = Str::slug($title, '-');
-              $slug_exsist = Post::where('slug', $data['slug'])->first();
-              $counter++;
-              }
-            }
-              
-              $post->update($data);
-              return redirect()->route('admin.posts.show', $post);
-    }
+        }
+
+        $post->update($data);
+        return redirect()->route('admin.posts.show', $post);
+      }
 
     /**
      * Remove the specified resource from storage.

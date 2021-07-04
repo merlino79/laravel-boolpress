@@ -42,6 +42,11 @@
         </tbody>
        </table>
      </div>
+      
    </div>
+   <section class="container">
+        {{ $posts->links() }}
+    </section>
+    
 </div>
 @endsection
