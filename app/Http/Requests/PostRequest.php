@@ -25,7 +25,8 @@ class PostRequest extends FormRequest
     {
         return [
             'title'=>'required|max:255',
-            'content'=>'required|min:3'
+            'content'=>'required|min:3',
+            'category_id' => 'nullable|exists:categories,id'
         ];
     }
 
@@ -36,6 +37,7 @@ class PostRequest extends FormRequest
         'title.max' => 'il testo del titolo deve avere un massimo di :max caratteri',
         'content..required' => 'il contenuto deve essere obbligatorio',
         'content.min' => 'il testo del contenuto deve avere almeno :min caratteri',
+        'category_id.exists' => 'La categoria scelta non è peresente'
       ];
     }
 }

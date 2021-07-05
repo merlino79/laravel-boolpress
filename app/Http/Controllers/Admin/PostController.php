@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
  use Illuminate\Support\Str;
 
@@ -32,7 +33,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+      $categories = Category::all();
+      return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -85,10 +87,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $categories = Category::all();
         if (!$post) {
           abort(404);
         }
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
