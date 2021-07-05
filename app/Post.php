@@ -9,6 +9,18 @@ class Post extends Model
   protected $fillable = [
     'title',
     'content',
-    'slug'
+    'slug',
+    'category_id'
   ];
+
+  // all'interno del controller faremo una query di questo tipo:
+  // $post = Post::find($id)
+  // $posts->category     <<<---- in questo modo ho il riusultato della relazione
+  // per ottenere questo risultatoi devo creare questa funzione:
+
+  public function category()
+  {
+    // mi restituisce una singola entità
+    return $this->belongsTo('App\Category');
+  }  
 }
