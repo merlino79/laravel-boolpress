@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Tag;
 use App\Category;
 use Illuminate\Http\Request;
  use Illuminate\Support\Str;
@@ -34,7 +35,8 @@ class PostController extends Controller
     public function create()
     {
       $categories = Category::all();
-      return view('admin.posts.create', compact('categories'));
+      $tags = Tag::all();
+      return view('admin.posts.create', compact('categories','tags'));
     }
 
     /**
@@ -46,6 +48,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $data = $request->all();
+        dd($data);
         $data['slug'] = Str::slug($data['title'], '-');
         $slug_exsist = Post::where('slug',$data['slug'])->first();
         $counter = 0;
