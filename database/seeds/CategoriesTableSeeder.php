@@ -13,7 +13,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = ['HTML', 'CSS', 'JavaScript', 'PHP'];
+        $data = ['HTML', 'CSS', 'JavaScript', 'PHP','LARAVEL'];
         foreach ($data as $value) {
 
           $new_cat = new Category();
