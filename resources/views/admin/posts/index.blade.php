@@ -64,29 +64,31 @@
    <section class="container">
         {{ $posts->links() }}
    </section>
-
-   @foreach ($categories as $category )
    <div class="container">
-     
      <div class="row">
-        
-       <div class="col">
-        
-        <h4>{{ $category->name }}</h4>
-        <ul>
-           @forelse ($category->posts as $post_category)
+       <div class="col d-flex mt-3">
+         @foreach ($categories as $category)
+           <h4>{{ $category->name }}</h4>
+           <ul>
+            @forelse ($category->posts as $post_category)
                 {{-- qui viene stampato quello che trovo --}}
-                <li>{{ $post_category->title }}</li>
+                <li class="mr-4 ">{{ $post_category->title }}</li>
             @empty
                 {{-- se non trovo nulla stampo quello che metto qui --}}
                 <li>nessun post presente</li>
             @endforelse
         </ul>
+          @endforeach
        </div>
+       
      </div>
-   </div>
     
-   @endforeach
+   </div>
+
+   
+   
+    
+   
     
 </div>
 @endsection
