@@ -39,7 +39,7 @@ class PostRequest extends FormRequest
         'content..required' => 'il contenuto deve essere obbligatorio',
         'content.min' => 'il testo del contenuto deve avere almeno :min caratteri',
         'category_id.exists' => 'La categoria scelta non è peresente',
-        'tags.exists' => 'Il tag   non è peresente'
+        'tags.exists' => 'Il tag non è peresente'
       ];
     }
 }

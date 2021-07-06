@@ -18,13 +18,18 @@
         </h3>
 
        <div>
-           @foreach($post->tags as $tag)
+           @forelse($post->tags as $tag)
               <span class="badge badge-primary">{{ $tag->name }}</span>
-           @endforeach
+           @empty
+              <h5>nessuna categoria associata</h5>
+           @endforelse
          </div>
          <div class="div">
-            <p>{{ $post->content }}</p>
-            <p>{{ $post->name }}</p>
+          <h3 class="mt-2 ">
+            description
+          </h3>
+         <p> {{ $post->content }}</p>
+         <p>{{ $post->name }}</p>
 
          </div>
         

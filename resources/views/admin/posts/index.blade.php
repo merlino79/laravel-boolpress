@@ -63,7 +63,30 @@
    </div>
    <section class="container">
         {{ $posts->links() }}
-    </section>
+   </section>
+
+   @foreach ($categories as $category )
+   <div class="container">
+     
+     <div class="row">
+        
+       <div class="col">
+        
+        <h4>{{ $category->name }}</h4>
+        <ul>
+           @forelse ($category->posts as $post_category)
+                {{-- qui viene stampato quello che trovo --}}
+                <li>{{ $post_category->title }}</li>
+            @empty
+                {{-- se non trovo nulla stampo quello che metto qui --}}
+                <li>nessun post presente</li>
+            @endforelse
+        </ul>
+       </div>
+     </div>
+   </div>
+    
+   @endforeach
     
 </div>
 @endsection
