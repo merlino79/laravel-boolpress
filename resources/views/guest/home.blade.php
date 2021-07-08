@@ -18,7 +18,7 @@
    </div>
 
    <div id="app">
-
+   {msg}
    </div>
 
 

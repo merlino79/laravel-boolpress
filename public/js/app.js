@@ -101,8 +101,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App'
+  name: 'App',
+  components: {},
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  created: function created() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
