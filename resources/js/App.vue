@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <h1> Sono in Vue</h1>
-   
-  </div>
+  <main class="container">
+
+    <!-- tag vue che riceve tutti i componenti ignettanti dal router -->
+    <router-view>
+
+    </router-view>
+    
+  </main>
+
 </template>
 
 <script>
