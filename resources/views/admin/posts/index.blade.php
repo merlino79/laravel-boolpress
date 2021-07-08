@@ -72,7 +72,7 @@
            <ul>
             @forelse ($category->posts as $post_category)
                 {{-- qui viene stampato quello che trovo --}}
-                <li class="mr-4 ">{{ $post_category->title }}</li>
+                <li class="mr-4">{{ $post_category->title }}</li>
             @empty
                 {{-- se non trovo nulla stampo quello che metto qui --}}
                 <li>nessun post presente</li>

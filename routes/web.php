@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', 'PageController@index');
 
 Auth::routes(['register=>false']);
+// Auth::routes();
 
 
 Route::prefix('admin')
@@ -26,3 +28,5 @@ Route::prefix('admin')
         route::get('/','HomeController@index')->name('home');
          Route::resource('/posts', 'PostController');
     });
+
+Route::get('{any?}', 'PageController@index')->where('any', '.*');

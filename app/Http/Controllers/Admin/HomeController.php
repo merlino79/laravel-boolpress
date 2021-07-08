@@ -11,3 +11,5 @@ class HomeController extends Controller
       return view('admin.home');
     }
 }
+
+//controller pagine statiche
