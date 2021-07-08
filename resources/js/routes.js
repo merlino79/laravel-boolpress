@@ -5,6 +5,9 @@ Vue.use(VueRouter);
 
 import Home from './pages/Home.vue';
 import Abaut from './pages/Abaut.vue';
+import Blog from './pages/Blog.vue';
+import Contact from './pages/Contact.vue';
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -17,7 +20,18 @@ const router = new VueRouter({
             path: '/abaut',
             name: 'abaut',
             component: Abaut
-        }
+        },
+        {
+            path: '/blog',
+            name: 'blog',
+            component: Blog
+        },
+        {
+            path: '/contacts',
+            name: 'contcts',
+            component: Contact
+        },
+
 
     ]
 });
