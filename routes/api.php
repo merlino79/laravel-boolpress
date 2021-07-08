@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +24,15 @@ Route::get('/test',function(){
   $data = [
     'nomi' => ['gino', 'pino'],
     'level' => 3,
+    'isValid' => true
   ];
-  return response()->json($data);
+   
+   //return response()->json($data);
+   return response()->json($data);
 });
 
 
-// Route::namespace('Api')
-//         ->group(function(){
-//             route::get('posts','PostController@index')->name('api.posts');
-//         });
+Route::namespace('Api')
+        ->group(function(){
+            Route::get('posts','PostController@index')->name('api.posts');
+        });

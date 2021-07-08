@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +15,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // $data = [
+        //   'nomi' => ['gino', 'pino'],
+        //   'level' => 3,
+        //   'isValid' => true
+        // ];
+        $posts = Post::all();
+       // return response()->json($data);
+        return response()->json($posts);
     }
 
     /**
@@ -24,11 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $data = [
-          'nomi' => ['gino','pino'],
-          'level' => 3,
-        ];
-        return response()->json($data);
+       
     }
 
     /**
