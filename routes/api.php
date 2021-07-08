@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//prova
+Route::get('/test',function(){
+  $data = [
+    'nomi' => ['gino', 'pino'],
+    'level' => 3,
+  ];
+  return response()->json($data);
+});
+
+
+// Route::namespace('Api')
+//         ->group(function(){
+//             route::get('posts','PostController@index')->name('api.posts');
+//         });

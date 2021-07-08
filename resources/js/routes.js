@@ -12,6 +12,7 @@ import Error404 from './pages/Error404.vue';
 
 const router = new VueRouter({
     mode: 'history',
+    linkExactActiveClass: 'active',
     routes: [{
             path: '/',
             name: 'home',
@@ -29,11 +30,11 @@ const router = new VueRouter({
         },
         {
             path: '/contacts',
-            name: 'contcts',
+            name: 'contacts',
             component: Contact
         },
         {
-            path: '/*',
+            path: '/',
             name: 'error404',
             component: Error404
         },
