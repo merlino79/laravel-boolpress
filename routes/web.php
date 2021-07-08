@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'PageController@index');
+//Route::get('/', 'PageController@index');
 
 Auth::routes(['register=>false']);
 // Auth::routes();

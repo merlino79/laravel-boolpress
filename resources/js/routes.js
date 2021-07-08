@@ -7,6 +7,7 @@ import Home from './pages/Home.vue';
 import Abaut from './pages/Abaut.vue';
 import Blog from './pages/Blog.vue';
 import Contact from './pages/Contact.vue';
+import Error404 from './pages/Error404.vue';
 
 
 const router = new VueRouter({
@@ -30,6 +31,11 @@ const router = new VueRouter({
             path: '/contacts',
             name: 'contcts',
             component: Contact
+        },
+        {
+            path: '/*',
+            name: 'error404',
+            component: Error404
         },
 
 
