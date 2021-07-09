@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -20,8 +21,18 @@ class PostController extends Controller
         //   'level' => 3,
         //   'isValid' => true
         // ];
-        $posts = Post::all();
+        // $posts = Post::all();
        // return response()->json($data);
+       $posts = DB::table('posts')
+          ->select(
+            'posts.id',
+            'posts.title',
+            'posts.content',
+            'posts.created_at as date',
+            'categories.name as category',
+          )
+          ->join('categories', 'posts.category_id','categories.id')
+          ->get();
         return response()->json($posts);
     }
 
