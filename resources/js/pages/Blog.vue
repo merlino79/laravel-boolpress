@@ -13,7 +13,7 @@
             <h5 class="card-title">{{post.title}}</h5>
             <span class="badge badge-success ">{{ post.category }}</span>
           </div>
-            <i>{{ post.date }}</i> 
+            <i>{{formatDate(post.date) }}</i> 
             <p class="card-text">{{ post.content }}</p>
             <a href="#" class="btn btn-primary">Go</a>
         </div>
@@ -42,7 +42,8 @@ export default {
   name: 'Blog',
   data(){
     return{
-      posts: []
+      posts: [],
+      pagination: {}
     }
   },
   methods:{
@@ -50,6 +51,10 @@ export default {
       axios.get('http://127.0.0.1:8000/api/posts')
         .then(res => {
           this.posts = res.data.data;
+           this.pagination = {
+                current: res.data.current_page,
+                last: res.data.last_page
+             }
           //console.log(res.data.data);
         })
         .catch(err => {
@@ -58,6 +63,7 @@ export default {
     }
   },
   formatDate(date){
+
             let d = new Date(date);
             let dy = d.getDate();
             let m = d.getMonth() + 1;

@@ -2065,7 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Blog',
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      pagination: {}
     };
   },
   methods: {
@@ -2073,7 +2074,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts').then(function (res) {
-        _this.posts = res.data.data; //console.log(res.data.data);
+        _this.posts = res.data.data;
+        _this.pagination = {
+          current: res.data.current_page,
+          last: res.data.last_page
+        }; //console.log(res.data.data);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -3509,7 +3514,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("i", [_vm._v(_vm._s(post.date))]),
+            _c("i", [_vm._v(_vm._s(_vm.formatDate(post.date)))]),
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(post.content))
