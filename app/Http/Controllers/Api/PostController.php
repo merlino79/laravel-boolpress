@@ -32,7 +32,9 @@ class PostController extends Controller
             'categories.name as category',
           )
           ->join('categories', 'posts.category_id','categories.id')
-          ->get();
+          ->orderBy('posts.id', 'desc')
+          ->paginate(3);
+          // ->get();
         return response()->json($posts);
     }
 

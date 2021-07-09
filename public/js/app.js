@@ -2031,16 +2031,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'blog',
   data: function data() {
-    return {};
+    return {
+      post: []
+    };
   },
   methods: {
     getpost: function getpost() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts').then(function (res) {
-        console.log(res);
+        _this.post = res.data.data; //console.log(res.data.data);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -3449,16 +3466,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("\n      blog\n    ")]),
+      _vm._v(" "),
+      _vm._l(_vm.posts, function(post) {
+        return _c("div", { key: "p" + post.id, staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(post.title))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(
+                "Some quick example text to build on the card title and make up the bulk of the card's content."
+              )
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
+              _vm._v("Go somewhere")
+            ])
+          ])
+        ])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("\n    blog\n  ")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
