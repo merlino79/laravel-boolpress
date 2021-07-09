@@ -3514,7 +3514,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("i", [_vm._v(_vm._s(_vm.formatDate(post.date)))]),
+            _c("i", [_vm._v(_vm._s(post.date))]),
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(post.content))

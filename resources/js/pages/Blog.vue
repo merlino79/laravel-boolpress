@@ -13,7 +13,7 @@
             <h5 class="card-title">{{post.title}}</h5>
             <span class="badge badge-success ">{{ post.category }}</span>
           </div>
-            <i>{{formatDate(post.date) }}</i> 
+            <i>{{post.date }}</i> 
             <p class="card-text">{{ post.content }}</p>
             <a href="#" class="btn btn-primary">Go</a>
         </div>
