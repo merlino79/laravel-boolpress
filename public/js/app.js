@@ -2044,12 +2044,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'blog',
+  name: 'Blog',
   data: function data() {
     return {
-      post: []
+      posts: []
     };
   },
   methods: {
@@ -2057,11 +2073,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts').then(function (res) {
-        _this.post = res.data.data; //console.log(res.data.data);
+        _this.posts = res.data.data; //console.log(res.data.data);
       })["catch"](function (err) {
         console.log(err);
       });
     }
+  },
+  formatDate: function formatDate(date) {
+    var d = new Date(date);
+    var dy = d.getDate();
+    var m = d.getMonth() + 1;
+    var y = d.getFullYear();
+    if (dy < 10) dy = '0' + dy;
+    if (m < 10) m = '0' + m;
+    return "".concat(dy, "/").concat(m, "/").concat(y);
   },
   created: function created() {
     this.getpost();
@@ -3474,27 +3499,76 @@ var render = function() {
       _vm._l(_vm.posts, function(post) {
         return _c("div", { key: "p" + post.id, staticClass: "card mb-3" }, [
           _c("div", { staticClass: "card-body" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v(_vm._s(post.title))
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(post.title))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "badge badge-success " }, [
+                _vm._v(_vm._s(post.category))
+              ])
             ]),
             _vm._v(" "),
+            _c("i", [_vm._v(_vm._s(post.date))]),
+            _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
-              _vm._v(
-                "Some quick example text to build on the card title and make up the bulk of the card's content."
-              )
+              _vm._v(_vm._s(post.content))
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-              _vm._v("Go somewhere")
+              _vm._v("Go")
             ])
           ])
         ])
-      })
+      }),
+      _vm._v(" "),
+      _vm._m(0)
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("Previous")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("1")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("2")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("3")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+              _vm._v("Next")
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

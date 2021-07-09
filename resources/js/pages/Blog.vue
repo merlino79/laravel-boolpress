@@ -9,11 +9,27 @@
        class="card mb-3">
         
         <div class="card-body">
+          <div class="d-flex justify-content-between">
             <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <span class="badge badge-success ">{{ post.category }}</span>
+          </div>
+            <i>{{ post.date }}</i> 
+            <p class="card-text">{{ post.content }}</p>
+            <a href="#" class="btn btn-primary">Go</a>
         </div>
 
+      </div>
+
+      <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
       </div>
       
   </div>
@@ -23,17 +39,17 @@
 import axios from 'axios';
 
 export default {
-  name: 'blog',
+  name: 'Blog',
   data(){
     return{
-      post: []
+      posts: []
     }
   },
   methods:{
     getpost(){
       axios.get('http://127.0.0.1:8000/api/posts')
         .then(res => {
-          this.post = res.data.data;
+          this.posts = res.data.data;
           //console.log(res.data.data);
         })
         .catch(err => {
@@ -41,6 +57,18 @@ export default {
         })
     }
   },
+  formatDate(date){
+            let d = new Date(date);
+            let dy = d.getDate();
+            let m = d.getMonth() + 1;
+            let y = d.getFullYear();
+
+            if(dy < 10) dy = '0' + dy;
+            if(m < 10) m = '0' + m;
+
+            return `${dy}/${m}/${y}`;
+        },
+        
   created(){
     this.getpost();
   }
