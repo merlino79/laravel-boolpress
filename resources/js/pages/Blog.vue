@@ -7,7 +7,7 @@
       <!-- loader -->
 
       <div v-if="!loader" class="container text-center mt-5">
-        <div class="lds-hourglass"></div>
+      <Loader />
       </div>
       <!-- wrapper post -->
       <div v-if="loader">
@@ -66,9 +66,14 @@
 
 <script>
 import axios from 'axios';
+import Loader from '../components/Loader.vue';
+
 
 export default {
   name: 'Blog',
+  components:{
+    Loader
+  },
   data(){
     return{
       posts: [],
@@ -122,36 +127,6 @@ export default {
 <style lang="scss" scoped>
 .badge-success{
   line-height: 30px;
-}.lds-hourglass {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-hourglass:after {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  width: 0;
-  height: 0;
-  margin: 8px;
-  box-sizing: border-box;
-  border: 32px solid #fff;
-  border-color: rgb(223, 73, 73) transparent rgb(234, 236, 113) transparent;
-  animation: lds-hourglass 1.2s infinite;
-}
-@keyframes lds-hourglass {
-  0% {
-    transform: rotate(0);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-  50% {
-    transform: rotate(900deg);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-  100% {
-    transform: rotate(1800deg);
-  }
 }
 
   
