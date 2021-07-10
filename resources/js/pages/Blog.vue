@@ -62,6 +62,7 @@
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
 import Card from '../components/Card.vue';
+// import FormatDate from '../classes/FormatDate.js';
 
 
 export default {
@@ -74,6 +75,7 @@ export default {
     return{
       posts: [],
       pagination: {},
+      // FormatDate,
       loader: false
     }
   },
@@ -99,7 +101,7 @@ export default {
         })
     },
     formatDate(date){
-            console.log(date);
+            //console.log(date);
             let d = new Date(date);
             let dy = d.getDate();
             let m = d.getMonth() + 1;
