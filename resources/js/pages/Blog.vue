@@ -10,26 +10,20 @@
       <Loader />
       </div>
       <!-- wrapper post -->
+      
       <div v-if="loader">
 
-     
-          <div
-          v-for="post in posts"
+          <Card 
+           v-for="post in posts"
           :key="'p'+post.id"
-          class="card mb-3">
-            
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">{{post.title}}</h5>
-                <span class="badge badge-success ">{{ post.category }}</span>
-              </div>
-                <i>{{formatDate(post.date)}}</i> 
-                <p class="card-text">{{ post.content }}</p>
-                <a href="#" class="btn btn-primary">Go</a>
-            </div>
-
-          </div>
-
+          :title="post.title"
+          :content="post.content"
+          :category="post.category"
+          :date="formatDate(post.date)"
+          :slug="post.slug"
+          />
+         
+          <!-- paginazione -->
           <div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -67,12 +61,14 @@
 <script>
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
+import Card from '../components/Card.vue';
 
 
 export default {
   name: 'Blog',
   components:{
-    Loader
+    Loader,
+    Card
   },
   data(){
     return{
@@ -125,9 +121,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.badge-success{
-  line-height: 30px;
-}
 
   
 

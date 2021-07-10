@@ -28,6 +28,7 @@ class PostController extends Controller
             'posts.id',
             'posts.title',
             'posts.content',
+            'posts.slug',
             'posts.created_at as date',
             'categories.name as category',
           )
@@ -65,9 +66,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+    $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
+    if ($post) {
+        $data=[
+          'success' => true,
+          'data' => $post
+        ];
+        return response()->json($data);
+    }
+    return response()->json(['succes'=>false]);
     }
 
     /**
