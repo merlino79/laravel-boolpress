@@ -2072,13 +2072,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Blog',
   data: function data() {
     return {
       posts: [],
-      pagination: {}
+      pagination: {},
+      loader: false
     };
   },
   methods: {
@@ -2086,6 +2104,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.loader = false;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts', {
         params: {
           page: page
@@ -2095,7 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.pagination = {
           current: res.data.current_page,
           last: res.data.last_page
-        }; //console.log(res.data.data);
+        };
+        _this.loader = true; //console.log(res.data.data);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2214,7 +2234,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".badge-success[data-v-c8ad8caa] {\n  line-height: 30px;\n}", ""]);
+exports.push([module.i, ".badge-success[data-v-c8ad8caa] {\n  line-height: 30px;\n}\n.lds-hourglass[data-v-c8ad8caa] {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-hourglass[data-v-c8ad8caa]:after {\n  content: \" \";\n  display: block;\n  border-radius: 50%;\n  width: 0;\n  height: 0;\n  margin: 8px;\n  box-sizing: border-box;\n  border: 32px solid #fff;\n  border-color: #df4949 transparent #eaec71 transparent;\n  -webkit-animation: lds-hourglass-data-v-c8ad8caa 1.2s infinite;\n          animation: lds-hourglass-data-v-c8ad8caa 1.2s infinite;\n}\n@-webkit-keyframes lds-hourglass-data-v-c8ad8caa {\n0% {\n    transform: rotate(0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n}\n50% {\n    transform: rotate(900deg);\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n100% {\n    transform: rotate(1800deg);\n}\n}\n@keyframes lds-hourglass-data-v-c8ad8caa {\n0% {\n    transform: rotate(0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n}\n50% {\n    transform: rotate(900deg);\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n100% {\n    transform: rotate(1800deg);\n}\n}", ""]);
 
 // exports
 
@@ -3563,124 +3583,148 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("\n      blog\n    ")]),
-      _vm._v(" "),
-      _vm._l(_vm.posts, function(post) {
-        return _c("div", { key: "p" + post.id, staticClass: "card mb-3" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(post.title))
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "badge badge-success " }, [
-                _vm._v(_vm._s(post.category))
-              ])
-            ]),
+  return _c("div", [
+    _c("h1", [_vm._v("\n      blog\n    ")]),
+    _vm._v(" "),
+    !_vm.loader
+      ? _c("div", { staticClass: "container text-center mt-5" }, [
+          _c("div", { staticClass: "lds-hourglass" })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.loader
+      ? _c(
+          "div",
+          [
+            _vm._l(_vm.posts, function(post) {
+              return _c(
+                "div",
+                { key: "p" + post.id, staticClass: "card mb-3" },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "d-flex justify-content-between" },
+                      [
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(post.title))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "badge badge-success " }, [
+                          _vm._v(_vm._s(post.category))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("i", [_vm._v(_vm._s(_vm.formatDate(post.date)))]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(post.content))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      { staticClass: "btn btn-primary", attrs: { href: "#" } },
+                      [_vm._v("Go")]
+                    )
+                  ])
+                ]
+              )
+            }),
             _vm._v(" "),
-            _c("i", [_vm._v(_vm._s(_vm.formatDate(post.date)))]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(post.content))
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-              _vm._v("Go")
+            _c("div", [
+              _c(
+                "nav",
+                { attrs: { "aria-label": "Page navigation example" } },
+                [
+                  _c(
+                    "ul",
+                    { staticClass: "pagination" },
+                    [
+                      _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: { disabled: _vm.pagination.current === 1 }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "page-link",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getPost(_vm.pagination.current - 1)
+                                }
+                              }
+                            },
+                            [_vm._v("«")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.pagination.last, function(i) {
+                        return _c(
+                          "li",
+                          {
+                            key: "i" + i,
+                            staticClass: "page-item",
+                            class: { active: _vm.pagination.current === i }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "page-link",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getPost(i)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(i))]
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: {
+                            disabled:
+                              _vm.pagination.current === _vm.pagination.last
+                          }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "page-link ",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getPost(_vm.pagination.current + 1)
+                                }
+                              }
+                            },
+                            [_vm._v("»")]
+                          )
+                        ]
+                      )
+                    ],
+                    2
+                  )
+                ]
+              )
             ])
-          ])
-        ])
-      }),
-      _vm._v(" "),
-      _c("div", [
-        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-          _c("ul", { staticClass: "pagination" }, [
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: { disabled: _vm.pagination.current === 1 }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass: "page-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.getPost(_vm.pagination.current - 1)
-                      }
-                    }
-                  },
-                  [_vm._v("«")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: {
-                  disabled: _vm.pagination.current === _vm.pagination.last
-                }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass: "page-link ",
-                    on: {
-                      click: function($event) {
-                        return _vm.getPost(_vm.pagination.current + 1)
-                      }
-                    }
-                  },
-                  [_vm._v("»")]
-                )
-              ]
-            )
-          ])
-        ])
-      ])
-    ],
-    2
-  )
+          ],
+          2
+        )
+      : _vm._e()
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [_vm._v("1")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [_vm._v("2")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [_vm._v("3")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
