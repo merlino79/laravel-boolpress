@@ -13,7 +13,7 @@
             <h5 class="card-title">{{post.title}}</h5>
             <span class="badge badge-success ">{{ post.category }}</span>
           </div>
-            <i>{{post.date }}</i> 
+            <i>{{formatDate(post.date)}}</i> 
             <p class="card-text">{{ post.content }}</p>
             <a href="#" class="btn btn-primary">Go</a>
         </div>
@@ -23,11 +23,23 @@
       <div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li 
+                :class="{'disabled': pagination.current === 1}"            
+                class="page-item">
+               <button
+                 @click="getPost(pagination.current -1)"
+                 class="page-link">&laquo;</button>
+              </li>
               <li class="page-item"><a class="page-link" href="#">1</a></li>
               <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <li 
+              :class="{'disabled': pagination.current === pagination.last}"
+              class="page-item">
+                <button 
+                  @click="getPost(pagination.current +1)" 
+                  class="page-link ">&raquo;</button>
+                </li>
             </ul>
           </nav>
       </div>
@@ -47,8 +59,12 @@ export default {
     }
   },
   methods:{
-    getpost(){
-      axios.get('http://127.0.0.1:8000/api/posts')
+    getPost(page = 1){
+      axios.get('http://127.0.0.1:8000/api/posts',{
+        params:{
+          page: page
+        }
+      })
         .then(res => {
           this.posts = res.data.data;
            this.pagination = {
@@ -60,10 +76,9 @@ export default {
         .catch(err => {
           console.log(err);
         })
-    }
-  },
-  formatDate(date){
-
+    },
+    formatDate(date){
+            console.log(date);
             let d = new Date(date);
             let dy = d.getDate();
             let m = d.getMonth() + 1;
@@ -73,14 +88,21 @@ export default {
             if(m < 10) m = '0' + m;
 
             return `${dy}/${m}/${y}`;
-        },
+        }
+  },
+  
+
         
   created(){
-    this.getpost();
+    this.getPost();
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.badge-success{
+  line-height: 30px;
+}
+  
 
 </style>
