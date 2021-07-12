@@ -2094,6 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _components_Card_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Card.vue */ "./resources/js/components/Card.vue");
+/* harmony import */ var _classes_FormatDate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../classes/FormatDate.js */ "./resources/js/classes/FormatDate.js");
 //
 //
 //
@@ -2156,7 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
- // import FormatDate from '../classes/FormatDate.js';
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Blog',
@@ -2168,7 +2169,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       posts: [],
       pagination: {},
-      // FormatDate,
+      FormatDate: _classes_FormatDate_js__WEBPACK_IMPORTED_MODULE_3__["default"],
       loader: false
     };
   },
@@ -2192,17 +2193,17 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
-    },
-    formatDate: function formatDate(date) {
-      //console.log(date);
-      var d = new Date(date);
-      var dy = d.getDate();
-      var m = d.getMonth() + 1;
-      var y = d.getFullYear();
-      if (dy < 10) dy = '0' + dy;
-      if (m < 10) m = '0' + m;
-      return "".concat(dy, "/").concat(m, "/").concat(y);
-    }
+    } // formatDate(date){
+    //         //console.log(date);
+    //         let d = new Date(date);
+    //         let dy = d.getDate();
+    //         let m = d.getMonth() + 1;
+    //         let y = d.getFullYear();
+    //         if(dy < 10) dy = '0' + dy;
+    //         if(m < 10) m = '0' + m;
+    //         return `${dy}/${m}/${y}`;
+    //     }
+
   },
   created: function created() {
     this.getPost();
@@ -2325,7 +2326,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2337,8 +2337,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       post: {},
-      loaded: false,
-      formatDate: _classes_FormatDate__WEBPACK_IMPORTED_MODULE_1__["default"]
+      FormatDate: _classes_FormatDate__WEBPACK_IMPORTED_MODULE_1__["default"],
+      loaded: false
     };
   },
   mounted: function mounted() {
@@ -2346,8 +2346,7 @@ __webpack_require__.r(__webpack_exports__);
 
     //console.log(this.$route.params.slug);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts/' + this.$route.params.slug).then(function (res) {
-      console.log(res.data);
-
+      // console.log(res.data);
       if (res.data.success) {
         _this.post = res.data.data;
         _this.loaded = true;
@@ -3943,7 +3942,7 @@ var render = function() {
                   title: post.title,
                   content: post.content,
                   category: post.category,
-                  date: _vm.formatDate(post.date),
+                  date: _vm.FormatDate.format(post.date),
                   slug: post.slug
                 }
               })
@@ -4185,7 +4184,9 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("i", [_vm._v(_vm._s(_vm.post.created_at))]),
+            _c("i", [
+              _vm._v(_vm._s(_vm.FormatDate.format(_vm.post.created_at)))
+            ]),
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(_vm.post.content))
@@ -4196,9 +4197,11 @@ var render = function() {
               [
                 _vm._v("\n           tag:\n            "),
                 _vm._l(_vm.post.tags, function(tag) {
-                  return _c("i", { key: "t" + tag.id, attrs: { tag: "" } }, [
-                    _vm._v(_vm._s(tag.name))
-                  ])
+                  return _c(
+                    "i",
+                    { key: "t" + tag.id, staticClass: "badge badge-info" },
+                    [_vm._v(_vm._s(tag.name))]
+                  )
                 })
               ],
               2

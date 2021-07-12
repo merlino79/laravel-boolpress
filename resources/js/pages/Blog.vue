@@ -19,7 +19,7 @@
           :title="post.title"
           :content="post.content"
           :category="post.category"
-          :date="formatDate(post.date)"
+          :date="FormatDate.format(post.date)"
           :slug="post.slug"
           />
          
@@ -62,7 +62,7 @@
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
 import Card from '../components/Card.vue';
-// import FormatDate from '../classes/FormatDate.js';
+import FormatDate from '../classes/FormatDate.js';
 
 
 export default {
@@ -75,7 +75,7 @@ export default {
     return{
       posts: [],
       pagination: {},
-      // FormatDate,
+      FormatDate,
       loader: false
     }
   },
@@ -100,18 +100,18 @@ export default {
           console.log(err);
         })
     },
-    formatDate(date){
-            //console.log(date);
-            let d = new Date(date);
-            let dy = d.getDate();
-            let m = d.getMonth() + 1;
-            let y = d.getFullYear();
+    // formatDate(date){
+    //         //console.log(date);
+    //         let d = new Date(date);
+    //         let dy = d.getDate();
+    //         let m = d.getMonth() + 1;
+    //         let y = d.getFullYear();
 
-            if(dy < 10) dy = '0' + dy;
-            if(m < 10) m = '0' + m;
+    //         if(dy < 10) dy = '0' + dy;
+    //         if(m < 10) m = '0' + m;
 
-            return `${dy}/${m}/${y}`;
-        }
+    //         return `${dy}/${m}/${y}`;
+    //     }
   },
   
 
